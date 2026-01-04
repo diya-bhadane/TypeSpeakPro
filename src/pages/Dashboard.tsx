@@ -9,6 +9,8 @@ import { format, subDays, startOfDay, endOfDay } from 'date-fns';
 
 const Dashboard = () => {
     const { user } = useAuth();
+    const [fullHistory, setFullHistory] = useState<any[]>([]);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
     const [stats, setStats] = useState({
         avgWpm: 0,
         avgAccuracy: 0,
@@ -40,6 +42,8 @@ const Dashboard = () => {
             console.error('Error fetching dashboard data:', error);
             return;
         }
+
+        setFullHistory(allResults);
 
         // 1. Calculate Aggregates
         const totalTests = allResults.length;
@@ -341,13 +345,79 @@ const Dashboard = () => {
                                 )}
                             </div>
                             <div className="mt-6 pt-4 border-t border-white/5">
-                                <button className="w-full py-2 text-sm text-center text-neutral-400 hover:text-white transition-colors">
+                                <button
+                                    onClick={() => setIsHistoryOpen(true)}
+                                    className="w-full py-2 text-sm text-center text-neutral-400 hover:text-white transition-colors"
+                                >
                                     View All History
                                 </button>
                             </div>
                         </CardContent>
                     </Card>
                 </div>
+
+                {/* Full History Modal - Adding this inline for speed, could be component */}
+                {isHistoryOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+                        <div className="bg-neutral-900 border border-white/10 rounded-xl w-full max-w-4xl max-h-[80vh] flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
+                            <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white">Typing History</h2>
+                                    <p className="text-sm text-neutral-400">Complete record of your practice sessions.</p>
+                                </div>
+                                <button
+                                    onClick={() => setIsHistoryOpen(false)}
+                                    className="p-2 hover:bg-white/10 rounded-full transition-colors text-neutral-400 hover:text-white"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                            <div className="flex-1 overflow-auto p-4 md:p-6 custom-scrollbar">
+                                <div className="rounded-lg border border-white/5 overflow-hidden">
+                                    <table className="w-full text-sm text-left">
+                                        <thead className="bg-white/5 text-neutral-400 font-medium">
+                                            <tr>
+                                                <th className="px-4 py-3">Date</th>
+                                                <th className="px-4 py-3">Mode</th>
+                                                <th className="px-4 py-3">WPM</th>
+                                                <th className="px-4 py-3">Accuracy</th>
+                                                <th className="px-4 py-3">Duration</th>
+                                                <th className="px-4 py-3">Errors</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            {fullHistory.map((item, i) => (
+                                                <tr key={i} className="hover:bg-white/5 transition-colors">
+                                                    <td className="px-4 py-3 text-neutral-300">{format(new Date(item.created_at), 'MMM dd, yyyy HH:mm')}</td>
+                                                    <td className="px-4 py-3 capitalize text-neutral-300">
+                                                        <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-xs">
+                                                            {item.mode || 'words'}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-4 py-3 font-bold text-teal-400">{item.wpm}</td>
+                                                    <td className="px-4 py-3 font-bold text-purple-400">{item.accuracy}%</td>
+                                                    <td className="px-4 py-3 text-neutral-400">{item.time_duration}s</td>
+                                                    <td className="px-4 py-3 text-red-400">{item.error_count || 0}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                    {fullHistory.length === 0 && (
+                                        <div className="p-8 text-center text-neutral-500">No history available yet.</div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="p-4 border-t border-white/5 flex justify-end">
+                                <button
+                                    onClick={() => setIsHistoryOpen(false)}
+                                    className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
