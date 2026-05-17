@@ -182,7 +182,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="flex gap-4 mt-6">
+                            <div className="flex gap-4 mt-6 justify-center md:justify-start">
                                 <div className="text-center p-3 rounded-xl bg-white/5 border border-white/5 min-w-[100px]">
                                     <div className="text-2xl font-bold text-white">#{stats.rank > 0 ? stats.rank : '-'}</div>
                                     <div className="text-xs text-neutral-400 uppercase tracking-widest mt-1">Global Rank</div>
