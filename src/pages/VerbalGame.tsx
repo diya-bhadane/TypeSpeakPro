@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { verbalCategories, Category, Question, Difficulty } from '../data/verbalQuestions';
-import { ArrowLeft, Clock, RefreshCcw, CheckCircle, XCircle, Trophy, Zap, Star, Flame, X } from 'lucide-react';
+import { ArrowLeft, Clock, RefreshCcw, CheckCircle, XCircle, Trophy, Zap, Star, Flame, X, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
@@ -193,9 +193,14 @@ const VerbalGame = () => {
         return (
             <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
                 <div className="max-w-4xl w-full">
-                    <Button variant="ghost" className="mb-8" onClick={() => navigate('/verbal-practice')}>
-                        <ArrowLeft className="w-4 h-4 mr-2" /> Back
-                    </Button>
+                    <div className="flex gap-4 mb-8">
+                        <Button variant="ghost" onClick={() => navigate('/verbal-practice')}>
+                            <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                        </Button>
+                        <Button variant="ghost" onClick={() => navigate('/')}>
+                            <Home className="w-4 h-4 mr-2" /> Home
+                        </Button>
+                    </div>
 
                     <div className="text-center mb-12">
                         <div className={`mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-6 shadow-lg`}>
@@ -322,9 +327,14 @@ const VerbalGame = () => {
 
             {/* Top Bar */}
             <div className="w-full max-w-4xl flex items-center justify-between mb-8 z-10">
-                <Button variant="ghost" className="gap-2" onClick={() => setGameState('difficulty-select')}>
-                    <ArrowLeft className="w-4 h-4" /> Quit
-                </Button>
+                <div className="flex gap-2">
+                    <Button variant="ghost" className="gap-2" onClick={() => setGameState('difficulty-select')}>
+                        <ArrowLeft className="w-4 h-4" /> Quit
+                    </Button>
+                    <Button variant="ghost" className="gap-2" onClick={() => navigate('/')}>
+                        <Home className="w-4 h-4" /> Home
+                    </Button>
+                </div>
 
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full border border-border shadow-sm">

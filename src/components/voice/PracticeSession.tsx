@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Mic, MicOff, RefreshCw, StopCircle } from 'lucide-react';
+import { ArrowLeft, Mic, MicOff, RefreshCw, StopCircle, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useSpeech } from '@/hooks/useSpeech';
 import { PROMPTS_DATA } from '@/data/voice-practice';
+import { useNavigate } from 'react-router-dom';
 
 interface PracticeSessionProps {
     config: {
@@ -19,6 +20,7 @@ interface PracticeSessionProps {
 }
 
 const PracticeSession = ({ config, onComplete, onCancel }: PracticeSessionProps) => {
+    const navigate = useNavigate();
     const { isListening, transcript, interimTranscript, startListening, stopListening, resetTranscript } = useSpeech(config.language);
 
     const [prompt, setPrompt] = useState('');
@@ -96,9 +98,14 @@ const PracticeSession = ({ config, onComplete, onCancel }: PracticeSessionProps)
 
     return (
         <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-4">
-            <Button variant="ghost" onClick={onCancel} className="mb-4 text-muted-foreground hover:text-white pl-0">
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back to Setup
-            </Button>
+            <div className="flex gap-4 mb-4">
+                <Button variant="ghost" onClick={onCancel} className="text-muted-foreground hover:text-white pl-0">
+                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Setup
+                </Button>
+                <Button variant="ghost" onClick={() => navigate('/')} className="text-muted-foreground hover:text-white pl-0">
+                    <Home className="w-4 h-4 mr-2" /> Home
+                </Button>
+            </div>
 
             <div className="flex flex-col md:flex-row gap-6">
                 {/* Main Content */}

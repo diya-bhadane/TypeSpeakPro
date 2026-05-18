@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Send, Sparkles, RefreshCw, CheckCircle, PenTool } from 'lucide-react';
+import { ArrowLeft, Send, Sparkles, RefreshCw, CheckCircle, PenTool, Home } from 'lucide-react';
 import { analyzeWriting, WritingAnalysisResult } from '@/services/aiAnalysis';
 import { toast } from 'sonner';
 
@@ -57,13 +57,22 @@ const WritingPractice = () => {
             <Navbar forceOpaque={true} />
 
             <main className="flex-1 container mx-auto px-4 pt-24 pb-12">
-                <Button
-                    variant="ghost"
-                    className="mb-8 hover:text-teal-400 text-muted-foreground pl-0"
-                    onClick={() => navigate('/voice-practice/communication')}
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
-                </Button>
+                <div className="flex gap-4 mb-8">
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-muted-foreground pl-0"
+                        onClick={() => navigate('/voice-practice/communication')}
+                    >
+                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-muted-foreground pl-0"
+                        onClick={() => navigate('/')}
+                    >
+                        <Home className="w-4 h-4 mr-2" /> Home
+                    </Button>
+                </div>
 
                 <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
                     {/* Left Panel: Input */}

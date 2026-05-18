@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useSpeech } from '@/hooks/useSpeech';
-import { ArrowLeft, Play, Pause, CheckCircle, XCircle, Ear, Globe, ChevronDown, Filter } from 'lucide-react';
+import { ArrowLeft, Play, Pause, CheckCircle, XCircle, Ear, Globe, ChevronDown, Filter, Home } from 'lucide-react';
 import { toast } from 'sonner';
 import { LISTENING_SCENARIOS, ListeningScenario } from '@/data/listeningScenarios';
 import confetti from 'canvas-confetti';
@@ -129,13 +129,22 @@ const ListeningPractice = () => {
             <Navbar forceOpaque={true} />
 
             <main className="flex-1 container mx-auto px-4 pt-24 pb-12">
-                <Button
-                    variant="ghost"
-                    className="mb-8 hover:text-teal-400 text-neutral-400 pl-0"
-                    onClick={() => navigate('/voice-practice/communication')}
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
-                </Button>
+                <div className="flex gap-4 mb-8">
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-neutral-400 pl-0"
+                        onClick={() => navigate('/voice-practice/communication')}
+                    >
+                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-neutral-400 pl-0"
+                        onClick={() => navigate('/')}
+                    >
+                        <Home className="w-4 h-4 mr-2" /> Home
+                    </Button>
+                </div>
 
                 <div className="max-w-4xl mx-auto space-y-8">
                     {/* Level Filter Bar */}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Home } from 'lucide-react';
 import SetupScreen from './speaking/SetupScreen';
 import MissionInterface from './speaking/MissionInterface';
 import { UserProfile, ZONES } from '@/data/speakingGameData';
@@ -54,7 +54,7 @@ const SpeakingPractice = () => {
 
             <main className="flex-1 container mx-auto px-4 pt-24 pb-12 flex flex-col relative">
                 {/* Global Back Button (except in deep immersion modes maybe?) */}
-                <div className="absolute top-24 left-4 z-10">
+                <div className="absolute top-24 left-4 z-10 flex gap-4">
                     <Button
                         variant="ghost"
                         className="hover:text-teal-400 text-neutral-400 pl-0"
@@ -65,6 +65,14 @@ const SpeakingPractice = () => {
                     >
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         {phase === 'MISSION' ? 'Back to Map' : 'Back to Modules'}
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-neutral-400 pl-0"
+                        onClick={() => navigate('/')}
+                    >
+                        <Home className="w-4 h-4 mr-2" />
+                        Home
                     </Button>
                 </div>
 

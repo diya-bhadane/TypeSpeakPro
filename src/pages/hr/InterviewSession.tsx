@@ -9,8 +9,9 @@ import InterviewSidebar from '@/components/hr/InterviewSidebar';
 import QuestionCard from '@/components/hr/QuestionCard';
 import MicButton from '@/components/hr/MicButton';
 import FeedbackPanel from '@/components/hr/FeedbackPanel';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, Loader2, Home } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const MAX_DURATION = 60; // seconds
 
@@ -21,6 +22,7 @@ interface HRSessionProps {
 }
 
 const HRSession: React.FC<HRSessionProps> = ({ onComplete, onCancel }) => {
+    const navigate = useNavigate();
     const { toast } = useToast();
     const {
         session,
@@ -235,6 +237,13 @@ const HRSession: React.FC<HRSessionProps> = ({ onComplete, onCancel }) => {
                             {Math.floor(timeRemaining / 60)}:{(timeRemaining % 60).toString().padStart(2, '0')}
                         </span>
                     </div>
+                    <button
+                        onClick={() => navigate('/')}
+                        className="text-muted-foreground hover:text-primary px-4 py-2 hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium flex items-center gap-1.5"
+                    >
+                        <Home className="w-4 h-4" />
+                        Home
+                    </button>
                     <button
                         onClick={handleExit}
                         className="text-muted-foreground hover:text-destructive px-4 py-2 hover:bg-destructive/10 rounded-lg transition-colors text-sm font-medium"

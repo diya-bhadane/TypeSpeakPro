@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, Mic, MicOff, RefreshCw, Volume2, BookOpen, ChevronDown, ChevronRight, Lock, Trophy, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Mic, MicOff, RefreshCw, Volume2, BookOpen, ChevronDown, ChevronRight, Lock, Trophy, ArrowRight, Home } from 'lucide-react';
 import { useSpeech } from '@/hooks/useSpeech';
 import { toast } from 'sonner';
 import { READING_PASSAGES } from '@/data/readingPassages';
@@ -133,13 +133,22 @@ const ReadingPractice = () => {
             <Navbar forceOpaque={true} />
 
             <main className="flex-1 container mx-auto px-4 pt-24 pb-12">
-                <Button
-                    variant="ghost"
-                    className="mb-8 hover:text-teal-400 text-neutral-400 pl-0"
-                    onClick={() => navigate('/voice-practice/communication')}
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
-                </Button>
+                <div className="flex gap-4 mb-8">
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-neutral-400 pl-0"
+                        onClick={() => navigate('/voice-practice/communication')}
+                    >
+                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        className="hover:text-teal-400 text-neutral-400 pl-0"
+                        onClick={() => navigate('/')}
+                    >
+                        <Home className="w-4 h-4 mr-2" /> Home
+                    </Button>
+                </div>
 
                 <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
                     {/* Sidebar: Collapsible Library */}

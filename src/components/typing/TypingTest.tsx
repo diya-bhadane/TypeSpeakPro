@@ -20,6 +20,7 @@ import RaceTrack from './RaceTrack';
 import MultiplayerModal from './MultiplayerModal';
 import MultiplayerResults from './MultiplayerResults';
 import { Loader2 } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 import {
     COMMON_WORDS, WORDS_EASY, WORDS_HARD,
@@ -727,6 +728,18 @@ const TypingTest = ({ onComplete, initialMultiplayer = false, aiMode = false, in
                     Restart Test
                 </Button>
             </div>
+            <div className="flex justify-center pt-8">
+                <Button
+                    variant="ghost"
+                    size="lg"
+                    onClick={() => navigate('/')}
+                    className="opacity-50 hover:opacity-100 transition-opacity"
+                >
+                    <Home className="mr-2 h-4 w-4" />
+                    Home
+                </Button>
+            </div>
+
             <MultiplayerModal
                 open={isMultiplayerOpen}
                 onOpenChange={setIsMultiplayerOpen}
