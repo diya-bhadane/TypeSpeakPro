@@ -704,7 +704,7 @@ const TypingTest = ({ onComplete, initialMultiplayer = false, aiMode = false, in
                 <input
                     ref={inputRef}
                     type="text"
-                    className="absolute opacity-0 w-full h-full z-20 cursor-text"
+                    className="absolute inset-0 opacity-0 w-full h-full z-20 cursor-text"
                     onChange={handleInputChange}
                     value={userInput}
                     onPaste={(e) => e.preventDefault()}
