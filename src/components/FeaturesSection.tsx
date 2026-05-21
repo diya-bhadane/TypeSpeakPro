@@ -1,4 +1,5 @@
 import { Keyboard, Mic, MessageSquare, BarChart3, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const features = [
   {
@@ -6,34 +7,40 @@ const features = [
     title: 'Real-Time Typing Test',
     description: 'Track your WPM, accuracy, and errors with live feedback as you type.',
     color: 'primary',
+    route: '/practice',
   },
   {
     icon: Mic,
     title: 'Voice & Communication Practice',
     description: 'Improve pronunciation, fluency, and get a confidence score for your speech.',
     color: 'accent',
+    route: '/voice-practice',
   },
   {
     icon: MessageSquare,
     title: 'HR Interview Practice',
     description: 'Practice common interview questions with voice recording and instant feedback.',
     color: 'orange',
+    route: '/voice-practice/hr',
   },
   {
     icon: BarChart3,
     title: 'Progress Dashboard',
     description: 'Visualize your improvement with charts, streaks, and detailed history.',
     color: 'success',
+    route:'/dashboard'
   },
   {
     icon: Sparkles,
     title: 'AI Feedback',
     description: 'Get smart suggestions powered by AI to accelerate your improvement.',
     color: 'primary',
+    route: '#',
   },
 ];
 
 const FeaturesSection = () => {
+  const navigate = useNavigate();
   const getColorClasses = (color: string) => {
     const colors = {
       primary: 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground',
@@ -69,6 +76,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <div
               key={feature.title}
+              onClick={() => navigate(feature.route)}
               className="group glass rounded-2xl p-8 card-hover cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
