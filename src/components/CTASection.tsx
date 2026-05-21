@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Keyboard, Mic } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
 
 const CTASection = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, openLoginModal } = useAuth();
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background Effects */}
@@ -38,9 +40,11 @@ const CTASection = () => {
               Start Free Practice
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="heroOutline" size="xl">
-              Create Account
-            </Button>
+            {!isAuthenticated && (
+              <Button variant="heroOutline" size="xl" onClick={openLoginModal}>
+                Create Account
+              </Button>
+            )}
           </div>
 
           {/* Trust Badges */}
